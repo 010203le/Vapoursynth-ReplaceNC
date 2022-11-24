@@ -29,6 +29,6 @@ import replacenc as rnc
 ncop = core.lsmas.LWLibavSource(r"C:\...\NCOP.mkv", threads=1)
 nced = core.lsmas.LWLibavSource(r"C:\...\NCED.mkv", threads=1)
 #mappings=[OP/EDstartFrame OP/EDendFrame]
-clip = rnc.ReplaceNC_manual(clip, ncop, mappings=[0 2157])
-clip = rnc.ReplaceNC_manual(clip, nced, mappings=[32608 34765])
+clip = rnc.ReplaceNC_manual(clip, ncop, mappings="[0 2157]")
+clip = rnc.ReplaceNC_manual(clip, nced, mappings="[32608 34765]")
 ```
