@@ -1,4 +1,3 @@
-
 def timeToFrame(time):
     time = time.split(":")
     hours = int(time[0])
@@ -9,19 +8,38 @@ def timeToFrame(time):
     #無條件捨去小數點後的數字(從0開始計算)。
     return int(frame)
 
-def main():
-    time = input("input time: ")
-    end  = input("input end time: ")
-    during = timeToFrame(end) - timeToFrame(time)
-    print('"['+str(timeToFrame(time))+' '+str(timeToFrame(end))+ ']"'+ 'during : ' + str(during))
-    exit()
+#load chapter file
+with open("chapters.txt", "r") as f:
+    chapters = f.readlines()
+    chapters = chapters[0::2]
+    chapters = [x.strip() for x in chapters]
+    chapters = [x.split("=") for x in chapters]
+    chapters = {x[0]:x[1] for x in chapters}
 
-main()
+#計算影格數
+for chapter in chapters:
+    chapters[chapter] = timeToFrame(chapters[chapter])
 
-'''
-00:00:00.000                             : en:Chapter 01
-00:01:30.007                             : en:Chapter 02
-00:08:41.980                             : en:Chapter 03
-00:17:06.984                             : en:Chapter 04
-00:22:29.974                             : en:Chapter 05
-'''
+cf = list(chapters.values())
+opt = []
+#保留間格符合條件項目
+for i in range(len(cf)):
+    try:
+        if cf[i+1] - cf[i] < 2160:
+            if cf[i+1] - cf[i] > 2154:
+                opt.append(str('"['+str(cf[i])+' '+str(cf[i+1])+']"'))
+    except:
+        opt.append(str('"['+str(cf[i])+' '+str(cf[i]+2157)+']"'))
+
+
+try:
+    print(opt[0])
+except:
+    print('本集沒有OP/ED')
+
+try:
+    print(opt[1])
+except:
+    print('本集沒有OP or ED')
+
+
