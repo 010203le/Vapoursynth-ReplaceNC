@@ -2,16 +2,13 @@
 
 based on AviSynth's ReplaceFramesSimple (http://avisynth.nl/index.php/RemapFrames)
 
-正在研究一個快速替換掉電視動畫的OP/ED為nc版本的方案
+Project to quickly replace the OP/ED of the TV anime with the NC (non-credit) version
 
-有rescale的話，可以省下對OP/ED mask credit的時間 (x
+## Usage
 
+You can first use getframe.py to input a chapter file to see if the frameRange is as expected.
 
-## usage
-
-可以先使用getframe.py輸入一個章節檔案，查看結果是否符合預期。
-
-目前版本很笨，不會判斷該集是否有常規版的OP/ED，也有可能換錯地方，務必檢查輸出結果是否符合預期。
+The current version is stupid. It will not judge whether there is a OP/ED in one episode, and it may replace NC to the wrong place. Be sure to check whether the output results meet expectations.
 
 ```py
 import replacenc as rnc
