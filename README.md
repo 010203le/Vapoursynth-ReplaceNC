@@ -15,7 +15,7 @@ import replacenc as rnc
 
 ncop = core.lsmas.LWLibavSource(r"C:\...\NCOP.mkv", threads=1)
 nced = core.lsmas.LWLibavSource(r"C:\...\NCED.mkv", threads=1)
-clip = rnc.ReplaceNC(clip, ncop, mode='op', chapter='C:\...\chapter.txt')
-clip = rnc.ReplaceNC(clip, nced, mode='ed', chapter='C:\...\chapter.txt')
+clip = rnc.ReplaceNC(clip, ncop, mode='op', chapter=r"C:\...\chapter.txt")
+clip = rnc.ReplaceNC(clip, nced, mode='ed', chapter=r"'C:\...\chapter.txt")
 ```
 
