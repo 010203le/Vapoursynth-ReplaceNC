@@ -38,6 +38,46 @@ def ReplaceNC(clipa, clipb, mode=None, chapter=''):
         out = temp
     return out
 
+def ReplaceNC_manual(clipa, clipb, mappings=None):
+    #clipb replace clipa ,mapping: [start end]
+
+    if not isinstance(clipa, vs.VideoNode):
+        raise TypeError('ReplaceNC_manual: "clipa" must be a clip!')
+    if not isinstance(clipb, vs.VideoNode):
+        raise TypeError('ReplaceNC_manual: "clipb" must be a clip!')
+    if clipa.format.id != clipb.format.id:
+        raise TypeError('ReplaceNC_manual: "clipa" and "clipb" must have the same format!')
+    if mappings is not None and not isinstance(mappings, str):
+        raise TypeError('ReplaceNC_manual: "mappings" must be a string!')
+    if mappings is None:
+        mappings = ''
+
+    mappings = mappings.replace(',', ' ').replace(':', ' ')
+
+    frames = re.findall('\d+(?!\d*\s*\d*\s*\d*\])', mappings)
+    ranges = re.findall('\[\s*\d+\s+\d+\s*\]', mappings)
+    maps = []
+    for range_ in ranges:
+        maps.append([int(x) for x in range_.strip('[ ]').split()])
+    for frame in frames:
+        maps.append([int(frame), int(frame)])
+
+    for start, end in maps:
+        if start > end:
+            raise ValueError('ReplaceNC_manual: Start frame is bigger than end frame: [{} {}]'.format(start, end))
+        if end >= clipa.num_frames or end >= clipb.num_frames+start:
+            raise ValueError('ReplaceNC_manual: End frame too big, one of the clips has less frames: {}'.format(end)) 
+
+    out = clipa
+    for start, end in maps:
+        temp = clipb[0:end+1-start] 
+        if start != 0:
+            temp = out[:start] + temp
+        if end < out.num_frames - 1:
+            temp = temp + out[end+1:]
+        out = temp
+    return out
+
 def getFrameRange(chapterFile, mode):
     try:
         with open(chapterFile, 'r') as f:
