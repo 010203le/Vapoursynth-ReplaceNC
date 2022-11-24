@@ -24,6 +24,4 @@ main()
 00:08:41.980                             : en:Chapter 03
 00:17:06.984                             : en:Chapter 04
 00:22:29.974                             : en:Chapter 05
-clip = fvf.ReplaceNC(clip, ncop, mappings="[0 2157]")
-clip = fvf.ReplaceNC(clip, nced, mappings="[32366 34523]")
 '''
