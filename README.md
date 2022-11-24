@@ -11,7 +11,7 @@ based on AviSynth's ReplaceFramesSimple (http://avisynth.nl/index.php/RemapFrame
 
 可以先使用getframe.py輸入一個章節檔案，查看結果是否符合預期。
 
-目前版本很笨，不會判斷該集是否有常規版的OP/ED，需要自行確認，也有可能換錯地方，務必自行檢查輸出結果是否符合預期。
+目前版本很笨，不會判斷該集是否有常規版的OP/ED，也有可能換錯地方，務必檢查輸出結果是否符合預期。
 
 ```py
 import replacenc as rnc
