@@ -1,3 +1,5 @@
+[中文說明](https://github.com/010203le/Vapoursynth-ReplaceNC/blob/main/README_cht.md "中文說明")
+
 ## ReplaceNC
 
 based on AviSynth's ReplaceFramesSimple (http://avisynth.nl/index.php/RemapFrames)
