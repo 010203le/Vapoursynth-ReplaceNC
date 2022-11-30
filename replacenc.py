@@ -114,7 +114,10 @@ def getFrameRange(chapterFile, mode):
         except:
             raise TypeError('ReplaceNC: This clip must not have op or ed!')
     elif mode == 'all':
-        return opt[0] + ' ' + opt[1]
+        try:
+            return opt[0] + ' ' + opt[1]
+        except:
+            raise TypeError('ReplaceNC: This clip must not have op or ed!')
     else:
         raise ValueError('ReplaceNC: mode is wrong!')
 
