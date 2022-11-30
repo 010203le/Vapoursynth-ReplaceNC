@@ -3,7 +3,7 @@ import vapoursynth as vs
 
 def ReplaceNC(clipa, clipb, mode=None, chapter=''):
     #based on AviSynth's ReplaceFramesSimple (http://avisynth.nl/index.php/RemapFrames)
-    #clipb replace clipa, clipb is ncop or nced, modes:op,ed, chapter:chapter file(.txt)
+    #clipb replace clipa, clipb is ncop or nced, modes:op,ed,all, chapter:chapter file(.txt)
 
     if not isinstance(clipa, vs.VideoNode):
         raise TypeError('ReplaceNC: "clipa" must be a clip!')
@@ -102,9 +102,9 @@ def getFrameRange(chapterFile, mode):
         try:
             if cf[i+1] - cf[i] < 2160:
                 if cf[i+1] - cf[i] > 2154:
-                    opt.append(str('['+str(cf[i])+' '+str(cf[i+1])+']'))
+                    opt.append('['+str(cf[i])+' '+str(cf[i+1])+']')
         except:
-            opt.append(str('['+str(cf[i])+' '+str(cf[i]+2157)+']'))
+            opt.append('['+str(cf[i])+' '+str(cf[i]+2157)+']')
     
     if mode == 'op':
         return opt[0]
@@ -113,6 +113,8 @@ def getFrameRange(chapterFile, mode):
             return opt[1]
         except:
             raise TypeError('ReplaceNC: This clip must not have op or ed!')
+    elif mode == 'all':
+        return opt[0] + ' ' + opt[1]
     else:
         raise ValueError('ReplaceNC: mode is wrong!')
 
